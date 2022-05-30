@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">DrawIntApp</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="currentUser">Login User: </string>
+    <string name="username">username</string>
+    <string name="usernameHint">your username</string>
+    <string name="password">password</string>
+    <string name="passwordHint">your password</string>
+    <string name="lightSwitch">switch light</string>
+    <string name="notLogin">not login</string>
+    <string name="doorOpenAuto">open door</string>
+    <string name="doorOpening">opening</string>
+    <string name="register">Register</string>
+    <string name="loginAccount">Login Account</string>
+    <string name="gender">Gender</string>
+    <string name="back2Login">Back To Login</string>
+    <string name="goHome">Go Home</string>
+    <string name="genderHint">Gender</string>
+    <string name="loginAccountHint">Login Account</string>
+
+</resources>
