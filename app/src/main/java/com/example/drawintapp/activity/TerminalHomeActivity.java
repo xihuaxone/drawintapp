@@ -1,9 +1,11 @@
 package com.example.drawintapp.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.drawintapp.R;
 import com.example.drawintapp.activity.commonComponent.CommonButton;
@@ -21,6 +23,8 @@ public class TerminalHomeActivity extends AppCompatActivity {
 
     TableLayout tableTerminalOverview;
 
+    Button buttonRegisterTerminal;
+
     {
         userController = new UserController();
         terminalController = new TerminalController();
@@ -28,6 +32,7 @@ public class TerminalHomeActivity extends AppCompatActivity {
 
     private void initViews() {
         tableTerminalOverview = findViewById(R.id.terminalOverview);
+        buttonRegisterTerminal = findViewById(R.id.buttonRegisterTerminal);
 
         CommonButton.registerButtonHome(this);
     }
@@ -45,6 +50,24 @@ public class TerminalHomeActivity extends AppCompatActivity {
             e.printStackTrace();
             setResult(500);
             finish();
+        }
+
+        buttonRegisterTerminal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TerminalHomeActivity.this, TerminalRegisterActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//设置不要刷新将要跳到的界面
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity
+                startActivityForResult(intent, 1);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            refreshTable();
         }
     }
 
@@ -86,6 +109,7 @@ public class TerminalHomeActivity extends AppCompatActivity {
 
     private TextView newTableTextView() {
         TextView textView = new TextView(tableTerminalOverview.getContext());
+        textView.setTextSize(15);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         return textView;
     }

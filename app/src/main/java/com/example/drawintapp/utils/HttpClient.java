@@ -26,7 +26,7 @@ public class HttpClient {
         return token == null || token.trim().equals("");
     }
 
-    public static <T> ApiResult<T> get(String api) {
+    public static <T> ApiResult<T> get(String api, Class<T> clazz) {
         OkHttpClient httpClient = createClient();
         Request request = new Request.Builder().url(host + api).header("Authorization", token == null ? "" : token).get().build();
         Response response;

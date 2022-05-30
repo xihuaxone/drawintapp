@@ -35,7 +35,7 @@ public class UserIdentifyDao {
     }
 
     public RSAPublicKey getPublicKey() {
-        ApiResult<String> apiResult = HttpClient.get("tokens/rsa_public_key");
+        ApiResult<String> apiResult = HttpClient.get("tokens/rsa_public_key", String.class);
         if (!apiResult.isSuccess()) {
             throw new RuntimeException("get publicKey failed: " + apiResult);
         }

@@ -16,15 +16,31 @@ public class TerminalBO {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTopic() {
         return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<TerminalActionBO> getActionList() {
         return actionList;
+    }
+
+    public void setActionList(List<TerminalActionBO> actionList) {
+        this.actionList = actionList;
     }
 }

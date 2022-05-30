@@ -18,5 +18,10 @@
     <string name="goHome">Go Home</string>
     <string name="genderHint">Gender</string>
     <string name="loginAccountHint">Login Account</string>
+    <string name="registerTerminal">Register Terminal</string>
 
+    <string name="terminalName">Terminal Name</string>
+    <string name="terminalTopic">Terminal Topic</string>
+    <string name="terminalNameInputHint">Customized Terminal Name</string>
+    <string name="terminalTopicInputHint">Define A Terminal Topic which should be unique</string>
 </resources>
