@@ -8,30 +8,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.drawintapp.R;
 import com.example.drawintapp.activity.commonComponent.CommonButton;
 import com.example.drawintapp.config.ConstantBase;
-import com.example.drawintapp.controller.TerminalController;
-import com.example.drawintapp.controller.UserController;
-import com.example.drawintapp.domain.bo.TerminalBO;
+import com.example.drawintapp.controller.TerminalMngController;
 import com.example.drawintapp.domain.bo.TerminalRegisterBO;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @SuppressLint("Registered")
 public class TerminalRegisterActivity extends AppCompatActivity {
-    private final TerminalController terminalController;
+    private final TerminalMngController terminalMngController;
 
     Button buttonRegisterTerminal;
     EditText terminalNameInput;
     EditText terminalTopicInput;
+    EditText terminalTypeInput;
 
     {
-        terminalController = new TerminalController();
+        terminalMngController = new TerminalMngController();
     }
 
     private void initViews() {
         buttonRegisterTerminal = findViewById(R.id.buttonRegisterTerminal);
         terminalNameInput = findViewById(R.id.terminalNameInput);
         terminalTopicInput = findViewById(R.id.terminalTopicInput);
+        terminalTypeInput = findViewById(R.id.terminalTypeInput);
 
         CommonButton.registerButtonHome(this);
     }
@@ -51,7 +48,7 @@ public class TerminalRegisterActivity extends AppCompatActivity {
 
                 TerminalRegisterBO terminalRegisterBO = getTerminalRegisterBO();
                 try {
-                    terminalController.register(terminalRegisterBO);
+                    terminalMngController.register(terminalRegisterBO);
                     buttonRegisterTerminal.setBackgroundColor(ConstantBase.colorButtonOk);
                     setResult(200);
                     finish();
@@ -67,6 +64,7 @@ public class TerminalRegisterActivity extends AppCompatActivity {
         TerminalRegisterBO terminalRegisterBO = new TerminalRegisterBO();
         terminalRegisterBO.setName(String.valueOf(terminalNameInput.getText()));
         terminalRegisterBO.setTopic(String.valueOf(terminalTopicInput.getText()));
+        terminalRegisterBO.setType(String.valueOf(terminalTypeInput.getText()));
         return terminalRegisterBO;
     }
 }

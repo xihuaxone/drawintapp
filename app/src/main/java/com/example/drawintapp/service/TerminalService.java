@@ -16,4 +16,8 @@ public class TerminalService {
     public void register(TerminalRegisterBO terminalRegisterBO) {
         terminalDao.register(terminalRegisterBO);
     }
+
+    public void callAction(Long tmId, String actionCode) {
+        terminalDao.callAction(tmId, actionCode);
+    }
 }

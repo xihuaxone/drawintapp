@@ -6,6 +6,8 @@ public class TerminalRegisterBO {
 
     private String name;
 
+    private String type;
+
     public String getTopic() {
         return topic;
     }
@@ -20,5 +22,13 @@ public class TerminalRegisterBO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

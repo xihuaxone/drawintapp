@@ -6,10 +6,15 @@ import com.example.drawintapp.service.TerminalService;
 
 import java.util.List;
 
-public class TerminalController {
+public class TerminalMngController {
+    UserController userController = new UserController();
     TerminalService terminalService = new TerminalService();
 
-    public void callAction(Long tmId, String actionCode) {
-        terminalService.callAction(tmId, actionCode);
+    public List<TerminalBO> list() {
+        return terminalService.list();
+    }
+
+    public void register(TerminalRegisterBO terminalRegisterBO) {
+        terminalService.register(terminalRegisterBO);
     }
 }

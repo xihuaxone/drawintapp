@@ -52,8 +52,40 @@ public class HttpClient {
 
     public static <T> ApiResult<T> post(String api, String data) {
         OkHttpClient httpClient = createClient();
+        if (data == null) {
+            data = "";
+        }
         RequestBody requestBody = RequestBody.create(data, mediaTypeDefault);
         Request request = new Request.Builder().url(host + api).header("Authorization", token == null ? "" : token).post(requestBody).build();
+
+        Response response;
+        try {
+            response = httpClient.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException("httpclient execute post error", e);
+        }
+        if (response.code() != 200) {
+            throw new RuntimeException(String.format("http request for api %s error", api));
+        }
+        String responseStr;
+        try {
+            responseStr = Objects.requireNonNull(response.body()).string();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ApiResult<T> apiResult = JSON.parseObject(responseStr, new TypeReference<ApiResult<T>>() {});
+        apiResult.setAuthorization(response.header("Authorization", null));
+        return apiResult;
+    }
+
+    public static <T> ApiResult<T> put(String api, String data) {
+        OkHttpClient httpClient = createClient();
+        if (data == null) {
+            data = "";
+        }
+        RequestBody requestBody = RequestBody.create(data, mediaTypeDefault);
+        Request request = new Request.Builder().url(host + api).header("Authorization", token == null ? "" : token).put(requestBody).build();
 
         Response response;
         try {

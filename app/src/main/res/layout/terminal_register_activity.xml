@@ -60,6 +60,18 @@
             app:layout_constraintTop_toBottomOf="@+id/terminalName"
     />
 
+    <TextView
+            android:id="@+id/terminalType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/terminalType"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/terminalTopic"
+    />
+
     <EditText
             android:id="@+id/terminalNameInput"
             android:layout_width="200dp"
@@ -86,6 +98,20 @@
             android:layout_marginLeft="30dp"
             app:layout_constraintLeft_toRightOf="@+id/terminalTopic"
             app:layout_constraintBottom_toBottomOf="@+id/terminalTopic"
+    />
+
+    <EditText
+            android:id="@+id/terminalTypeInput"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@color/white"
+            android:textStyle="italic"
+            android:hint="@string/terminalTypeInputHint"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toRightOf="@+id/terminalType"
+            app:layout_constraintBottom_toBottomOf="@+id/terminalType"
     />
 
 

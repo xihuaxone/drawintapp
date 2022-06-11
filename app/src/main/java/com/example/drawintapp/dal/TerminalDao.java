@@ -24,4 +24,11 @@ public class TerminalDao {
             throw new RuntimeException("register biz error: " + apiResult);
         }
     }
+
+    public void callAction(Long tmId, String actionCode) {
+        ApiResult<Void> apiResult = HttpClient.put(String.format("/terminals/%s/actions/%s", tmId, actionCode), null);
+        if (!apiResult.isSuccess()) {
+            throw new RuntimeException("register biz error: " + apiResult);
+        }
+    }
 }

@@ -24,4 +24,6 @@
     <string name="terminalTopic">Terminal Topic</string>
     <string name="terminalNameInputHint">Customized Terminal Name</string>
     <string name="terminalTopicInputHint">Define A Terminal Topic which should be unique</string>
+    <string name="terminalTypeInputHint">Terminal Type</string>
+    <string name="terminalType">Terminal Type</string>
 </resources>

@@ -9,16 +9,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.drawintapp.R;
 import com.example.drawintapp.activity.commonComponent.CommonButton;
+import com.example.drawintapp.config.ConstantBase;
 import com.example.drawintapp.controller.TerminalController;
+import com.example.drawintapp.controller.TerminalMngController;
 import com.example.drawintapp.controller.UserController;
+import com.example.drawintapp.domain.bo.TerminalActionBO;
 import com.example.drawintapp.domain.bo.TerminalBO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @SuppressLint("Registered")
 public class TerminalHomeActivity extends AppCompatActivity {
     private final UserController userController;
+    private final TerminalMngController terminalMngController;
     private final TerminalController terminalController;
 
     TableLayout tableTerminalOverview;
@@ -27,6 +32,7 @@ public class TerminalHomeActivity extends AppCompatActivity {
 
     {
         userController = new UserController();
+        terminalMngController = new TerminalMngController();
         terminalController = new TerminalController();
     }
 
@@ -72,7 +78,7 @@ public class TerminalHomeActivity extends AppCompatActivity {
     }
 
     private void refreshTable() {
-        List<TerminalBO> terminalList = terminalController.list();
+        List<TerminalBO> terminalList = terminalMngController.list();
         tableTerminalOverview.removeAllViews();
         tableTerminalOverview.setStretchAllColumns(true);
 
@@ -100,9 +106,34 @@ public class TerminalHomeActivity extends AppCompatActivity {
                     .map(rec -> String.format("%s(%s)", rec.getName(), rec.getCode())).collect(Collectors.toList());
             columnActions.setText(String.join(", ", actionList));
 
+            List<Button> actionButtons = new ArrayList<>(5);
+
+            for (TerminalActionBO actionBO : terminal.getActionList()) {
+                Button buttonAction = new Button(tableTerminalOverview.getContext());
+                buttonAction.setText(actionBO.getName());
+                buttonAction.setBackgroundColor(ConstantBase.colorButtonOk);
+                buttonAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            terminalController.callAction(terminal.getId(), actionBO.getCode());
+                            buttonAction.setBackgroundColor(ConstantBase.colorButtonOk);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            buttonAction.setBackgroundColor(ConstantBase.colorButtonError);
+                        }
+                    }
+                });
+                actionButtons.add(buttonAction);
+            }
+
+            LinearLayout layoutButtons = new TableLayout(tableTerminalOverview.getContext());
+            actionButtons.forEach(layoutButtons::addView);
+
             row.addView(columnId);
             row.addView(columnName);
-            row.addView(columnActions);
+//            row.addView(columnActions);
+            row.addView(layoutButtons);
             tableTerminalOverview.addView(row);
         }
     }
